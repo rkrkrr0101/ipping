@@ -1,22 +1,26 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[20]:
+# In[44]:
 
 
 import threading
-import subprocess
 import configparser
 import time
+import ping3
 
 
-# In[21]:
+# In[45]:
 
 
 def run(ip):
-    cmd='ping -n 1 -w 1 '+ip
-    res=subprocess.call(cmd)
-    
+    #cmd='ping -n 1 -w 1 '+ip
+    resp = ping3.ping(ip,timeout=1)
+    if resp == None:
+        res=1
+    else:
+        res=0 
+
     conf=configparser.ConfigParser()
     conf['abc']={}
     conf['abc'][ip]=str(res)
@@ -24,7 +28,7 @@ def run(ip):
         conf.write(configfile)
 
 
-# In[24]:
+# In[46]:
 
 
 readconf=configparser.ConfigParser()
@@ -32,7 +36,7 @@ readconf.read('config.ini',encoding='utf8')
 iptable=readconf.sections()
 
 
-# In[25]:
+# In[47]:
 
 
 #iptable=['127.0.0.1','132.168.42.3','127.0.0.1','127.0.0.1','132.168.41.3']
@@ -44,11 +48,17 @@ while(True):
     time.sleep(1)
     
 
-print("main thread end")
+
     
 
 
-# In[19]:
+# In[29]:
+
+
+
+
+
+# In[ ]:
 
 
 
