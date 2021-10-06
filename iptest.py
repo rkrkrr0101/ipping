@@ -1,16 +1,29 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[44]:
+# In[2]:
 
 
+import mmap
 import threading
 import configparser
 import time
 import ping3
 
 
-# In[45]:
+# In[ ]:
+
+
+mm=mmap.mmap(0,1,'as1123')
+a=mm.read(1)[0]
+if a==255:
+    sys.exit()
+mm.seek(0)
+mm.write(bytes([255]))
+a=0
+
+
+# In[4]:
 
 
 def run(ip):
@@ -28,7 +41,7 @@ def run(ip):
         conf.write(configfile)
 
 
-# In[46]:
+# In[5]:
 
 
 readconf=configparser.ConfigParser()
@@ -52,13 +65,13 @@ while(True):
     
 
 
-# In[29]:
+# In[2]:
 
 
 
 
 
-# In[ ]:
+# In[1]:
 
 
 
